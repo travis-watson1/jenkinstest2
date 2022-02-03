@@ -38,7 +38,7 @@ pipeline {
 	    
 	stage('Restore packages'){
 
-		bat 'C:\ProgramData\chocolatey\lib\NuGet.CommandLine\tools\nuget.exe restore HelloWorld.sln'
+		bat 'C:\\ProgramData\\chocolatey\\lib\\NuGet.CommandLine\\tools\\nuget.exe restore HelloWorld.sln'
 
 	}
 
