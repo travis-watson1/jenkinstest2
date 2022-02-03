@@ -40,7 +40,8 @@ pipeline {
             steps {
 		    script{
 			def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-          		bat "\"${msbuild}\" ${PROJECT_SOLUTION_NAME}  /t:Restore /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}" 
+			bat "\"${msbuild}\" ${PROJECT_SOLUTION_NAME}  /t:Restore /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}" 
+          		//bat "\"${msbuild}\" ${PROJECT_SOLUTION_NAME}  /t:Restore /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}" 
 		    }
 
                 
