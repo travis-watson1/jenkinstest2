@@ -25,7 +25,7 @@ pipeline {
                         userRemoteConfigs: [
                             [
                                 credentialsId: 'git', 
-				url: ${GITHUB_REPO_URL}
+				url: '${GITHUB_REPO_URL}'
                             ]
                         ]
                     ]
