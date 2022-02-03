@@ -7,7 +7,7 @@ pipeline {
         PROJECT_NAME 					= 'test-project'
         PROJECT_S3_BUCKET_REGION 		= 'us-east-1'
         PROJECT_S3_BUCKET_NAME 			= 'grammable-travis-watson'
-        PROJECT_BUILD_OUTPUT_FILE_NAME 	= 'Jenkinsfile'              
+        PROJECT_BUILD_OUTPUT_FILE_NAME 	= 'test.zip'              
         PROJECT_SOLUTION_NAME 			= 'HelloWorld.sln'
 		AUTO_SCALING_GROUP_NAME			= 'terraform-asg-test-app'    
 		ASG_MIN_SIZE					= 1
@@ -45,6 +45,15 @@ pipeline {
 
                 // bat 'nuget restore ${PROJECT_SOLUTION_NAME}'
 		        // bat "\"${tool 'MSBuild_VS2019community'}\\msbuild.exe\" ${PROJECT_SOLUTION_NAME} /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+            }
+        }
+	    
+        stage ('zip artifact') {
+            steps {
+                sh 'mkdir archive'
+                sh 'echo test > archive/test.txt'
+                zip zipFile: 'test.zip', archive: false, dir: 'archive'
+                archiveArtifacts artifacts: 'test.zip', fingerprint: true
             }
         }
 
