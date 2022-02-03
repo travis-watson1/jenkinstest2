@@ -40,8 +40,7 @@ pipeline {
             steps {
 		    script{
 			def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-			bat "nuget restore"   
-          		bat "\"${msbuild}\" HelloWorld.sln" 
+          		bat "\"${msbuild}\" ${PROJECT_SOLUTION_NAME} /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}" 
 		    }
 
                 // bat 'nuget restore ${PROJECT_SOLUTION_NAME}'
