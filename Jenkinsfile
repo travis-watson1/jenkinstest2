@@ -7,9 +7,9 @@ pipeline {
         PROJECT_NAME 					= 'test-project'
         PROJECT_S3_BUCKET_REGION 		= 'us-east-1'
         PROJECT_S3_BUCKET_NAME 			= 'grammable-travis-watson'
-        PROJECT_BUILD_OUTPUT_FILE_NAME 	= 'testapp.zip'               # output zip file name to be created in this jenkins pipeline
+        PROJECT_BUILD_OUTPUT_FILE_NAME 	= 'testapp.zip'              
         PROJECT_SOLUTION_NAME 			= 'HelloWorld.sln'
-		AUTO_SCALING_GROUP_NAME			= 'terraform-asg-test-app'    # auto scaling group name which is created as part of Terraform in AWS
+		AUTO_SCALING_GROUP_NAME			= 'terraform-asg-test-app'    
 		ASG_MIN_SIZE					= 1
 		ASG_MAX_SIZE					= 2
 		ASG_DESIRED_SIZE				= 2
