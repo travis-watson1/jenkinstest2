@@ -44,7 +44,7 @@ pipeline {
 		    }
 
                 // bat 'nuget restore ${PROJECT_SOLUTION_NAME}'
-		        // bat "\"${tool 'MSBuild_VS2019community'}\\msbuild.exe\" ${PROJECT_SOLUTION_NAME} /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+		        // bat "\"${tool 'MSBuild_VS2019community'}\\msbuild.exe\" ${PROJECT_SOLUTION_NAME} /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:Configuration=Release /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
             }
         }
 	    
