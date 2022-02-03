@@ -65,24 +65,24 @@ pipeline {
             }
         }
 
-       stage('Update Autoscaling to pull latest artifact') {
-            steps {
-                withCredentials([[
-                $class: 'AmazonWebServicesCredentialsBinding',
-                accessKeyVariable: 'AWS_ACCESS_KEY_ID', // dev credentials
-                credentialsId: 'AWSCRED',
-                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-                ]]){
-                    powershell '''
-						echo "Scaling down Autoscaling Group"
-						Update-ASAutoScalingGroup -AutoScalingGroupName "$($ENV:AUTO_SCALING_GROUP_NAME)" -MinSize 0 -MaxSize 0 -DesiredCapacity 0 -Region "$($ENV:PROJECT_S3_BUCKET_REGION)" -ProfileName "$($ENV:PROJECT_NAME)"
-                        Start-Sleep -s 30
-						echo "Scaling up Autoscaling Group"
-						Update-ASAutoScalingGroup -AutoScalingGroupName "$($ENV:AUTO_SCALING_GROUP_NAME)" -MinSize "$($ENV:ASG_MIN_SIZE)" -MaxSize "$($ENV:ASG_MAX_SIZE)" -DesiredCapacity "$($ENV:ASG_DESIRED_SIZE)" -Region "$($ENV:PROJECT_S3_BUCKET_REGION)" -ProfileName "$($ENV:PROJECT_NAME)"
-						Remove-AWSCredentialProfile -ProfileName "$($ENV:PROJECT_NAME)" -Confirm:$false
-					'''
-                }
-            }
-        }
+ //      stage('Update Autoscaling to pull latest artifact') {
+ //           steps {
+ //               withCredentials([[
+ //               $class: 'AmazonWebServicesCredentialsBinding',
+ //               accessKeyVariable: 'AWS_ACCESS_KEY_ID', // dev credentials
+ //               credentialsId: 'AWSCRED',
+ //               secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+ //               ]]){
+ //                   powershell '''
+//						echo "Scaling down Autoscaling Group"
+//						Update-ASAutoScalingGroup -AutoScalingGroupName "$($ENV:AUTO_SCALING_GROUP_NAME)" -MinSize 0 -MaxSize 0 -DesiredCapacity 0 -Region "$($ENV:PROJECT_S3_BUCKET_REGION)" -ProfileName "$($ENV:PROJECT_NAME)"
+ //                       Start-Sleep -s 30
+//						echo "Scaling up Autoscaling Group"
+//						Update-ASAutoScalingGroup -AutoScalingGroupName "$($ENV:AUTO_SCALING_GROUP_NAME)" -MinSize "$($ENV:ASG_MIN_SIZE)" -MaxSize "$($ENV:ASG_MAX_SIZE)" -DesiredCapacity "$($ENV:ASG_DESIRED_SIZE)" -Region "$($ENV:PROJECT_S3_BUCKET_REGION)" -ProfileName "$($ENV:PROJECT_NAME)"
+//						Remove-AWSCredentialProfile -ProfileName "$($ENV:PROJECT_NAME)" -Confirm:$false
+//					'''
+//                }
+//            }
+ //       }
     }
 }
