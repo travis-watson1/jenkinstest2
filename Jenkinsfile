@@ -50,9 +50,9 @@ pipeline {
 	    
         stage ('zip artifact') {
             steps {
-                bat 'mkdir archive'
-                bat 'echo test > archive/test.txt'
-                script{ zip zipFile: 'test.zip', archive: false, dir: 'archive' }
+                //bat 'mkdir archive'
+                //bat 'echo test > archive/test.txt'
+                script{ zip zipFile: 'test.zip', archive: false, dir: 'helloworld' }
 		archiveArtifacts artifacts: 'test.zip', fingerprint: true
             }
         }
