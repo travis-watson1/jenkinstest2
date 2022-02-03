@@ -38,8 +38,9 @@ pipeline {
 
         stage('Building the project') {
             steps {
+		    bat "C:\ProgramData\chocolatey\lib\NuGet.CommandLine\tools\nuget.exe" restore SeleniumNUnitParam.sln
                 // bat 'nuget restore ${PROJECT_SOLUTION_NAME}'
-		        bat "\"${tool 'MSBuild_VS2019community'}\\msbuild.exe\" ${PROJECT_SOLUTION_NAME} /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
+		        // bat "\"${tool 'MSBuild_VS2019community'}\\msbuild.exe\" ${PROJECT_SOLUTION_NAME} /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
             }
         }
 
