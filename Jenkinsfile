@@ -9,7 +9,6 @@ pipeline {
         PROJECT_S3_BUCKET_NAME 			= 'grammable-travis-watson'
         PROJECT_BUILD_OUTPUT_FILE_NAME 		= 'test.zip'              
         PROJECT_SOLUTION_NAME 			= 'HelloWorld.sln'
-	GITHUB_REPO_URL				= 'https://github.com/travis-watson1/jenkinstest2.git'
     }
 
     stages {
@@ -25,7 +24,7 @@ pipeline {
                         userRemoteConfigs: [
                             [
                                 credentialsId: 'git', 
-				url: 'ENV:GITHUB_REPO_URL'
+				url: 'https://github.com/travis-watson1/jenkinstest2.git'
                             ]
                         ]
                     ]
