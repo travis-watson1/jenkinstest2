@@ -36,21 +36,27 @@ pipeline {
             }
         }
 
-        stage('Building the project') {
-            steps {
-		    script{
-			def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-			//bat "\"${msbuild}\" ${PROJECT_SOLUTION_NAME}  /t:Restore /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}" 
-          		bat "\"${msbuild}\" ${PROJECT_SOLUTION_NAME}  /t:Restore /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /p:Configuration=Release /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}" 
-		    }
-
+//        stage('Building the project') {
+   //         steps {
+	//	    script{
+//			def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
+//			//bat "\"${msbuild}\" ${PROJECT_SOLUTION_NAME}  /t:Restore /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}" 
+   //       		bat "\"${msbuild}\" ${PROJECT_SOLUTION_NAME}  /t:Restore /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /p:Configuration=Release /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}" 
+//		    }
+//
                 
 		    
 		    
 		    // bat 'nuget restore ${PROJECT_SOLUTION_NAME}'
 		        // bat "\"${tool 'MSBuild_VS2019community'}\\msbuild.exe\" ${PROJECT_SOLUTION_NAME} /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:PublishProfile=FolderProfile /p:Configuration=Release /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
-            }
-        }
+       //     }
+     //   }
+				stage('Build') {
+    					steps {
+    					    bat "\"${tool 'MSBuild'}\" HelloWorld.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\inetpub\\wwwroot"
+    					}
+				}
+
 	    
         stage ('zip artifact') {
             steps {
@@ -77,25 +83,5 @@ pipeline {
                 }
             }
         }
-
- //      stage('Update Autoscaling to pull latest artifact') {
- //           steps {
- //               withCredentials([[
- //               $class: 'AmazonWebServicesCredentialsBinding',
- //               accessKeyVariable: 'AWS_ACCESS_KEY_ID', // dev credentials
- //               credentialsId: 'AWSCRED',
- //               secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
- //               ]]){
- //                   powershell '''
-//						echo "Scaling down Autoscaling Group"
-//						Update-ASAutoScalingGroup -AutoScalingGroupName "$($ENV:AUTO_SCALING_GROUP_NAME)" -MinSize 0 -MaxSize 0 -DesiredCapacity 0 -Region "$($ENV:PROJECT_S3_BUCKET_REGION)" -ProfileName "$($ENV:PROJECT_NAME)"
- //                       Start-Sleep -s 30
-//						echo "Scaling up Autoscaling Group"
-//						Update-ASAutoScalingGroup -AutoScalingGroupName "$($ENV:AUTO_SCALING_GROUP_NAME)" -MinSize "$($ENV:ASG_MIN_SIZE)" -MaxSize "$($ENV:ASG_MAX_SIZE)" -DesiredCapacity "$($ENV:ASG_DESIRED_SIZE)" -Region "$($ENV:PROJECT_S3_BUCKET_REGION)" -ProfileName "$($ENV:PROJECT_NAME)"
-//						Remove-AWSCredentialProfile -ProfileName "$($ENV:PROJECT_NAME)" -Confirm:$false
-//					'''
-//                }
-//            }
- //       }
     }
 }
