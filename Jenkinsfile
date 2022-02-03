@@ -35,7 +35,7 @@ pipeline {
 	stage('Restore packages'){
 		steps {
 			script{
-				bat 'C:\\ProgramData\\chocolatey\\lib\\NuGet.CommandLine\\tools\\nuget.exe restore ${PROJECT_SOLUTION_NAME}'
+				bat "C:\\ProgramData\\chocolatey\\lib\\NuGet.CommandLine\\tools\\nuget.exe restore ${PROJECT_SOLUTION_NAME}"
 			}
 		}
 	}
