@@ -40,7 +40,7 @@ pipeline {
             steps {
 		    script{
 			def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-          		bat "${msbuild} HelloWorld.sln"  
+          		bat "\"${msbuild}\" HelloWorld.sln" 
 		    }
 
                 // bat 'nuget restore ${PROJECT_SOLUTION_NAME}'
