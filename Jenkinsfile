@@ -7,7 +7,7 @@ pipeline {
         PROJECT_NAME 					= 'test-project'
         PROJECT_S3_BUCKET_REGION 		= 'us-east-1'
         PROJECT_S3_BUCKET_NAME 			= 'grammable-travis-watson'
-        PROJECT_BUILD_OUTPUT_FILE_NAME 	= 'testapp.zip'              
+        PROJECT_BUILD_OUTPUT_FILE_NAME 	= 'HelloWorld.sln'              
         PROJECT_SOLUTION_NAME 			= 'HelloWorld.sln'
 		AUTO_SCALING_GROUP_NAME			= 'terraform-asg-test-app'    
 		ASG_MIN_SIZE					= 1
