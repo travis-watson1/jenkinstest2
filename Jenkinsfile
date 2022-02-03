@@ -38,8 +38,11 @@ pipeline {
 
         stage('Building the project') {
             steps {
-          	def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-          	bat "${msbuild} SimpleWindowsProject.sln"
+		    script{
+			def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
+          		bat "${msbuild} SimpleWindowsProject.sln"  
+		    }
+
                 // bat 'nuget restore ${PROJECT_SOLUTION_NAME}'
 		        // bat "\"${tool 'MSBuild_VS2019community'}\\msbuild.exe\" ${PROJECT_SOLUTION_NAME} /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}"
             }
